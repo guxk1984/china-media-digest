@@ -30,10 +30,26 @@ jobs:
           OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
         run: python generate.py
 
-      - name: Commit & push
+      - name: Commit & push (GitHub Pages 备份)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
           git commit -m "daily digest $(date +'%Y-%m-%d' -d '+8 hours')" || echo "no changes"
           git push
+
+      - name: Deploy to Gitee Pages (国内镜像)
+        if: ${{ secrets.GITEE_TOKEN != '' && secrets.GITEE_USERNAME != '' }}
+        env:
+          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
+          GITEE_USERNAME: ${{ secrets.GITEE_USERNAME }}
+        run: |
+          cd docs
+          git init -q
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "deploy $(date +'%Y-%m-%d' -d '+8 hours')"
+          git push -f "https://$GITEE_USERNAME:$GITEE_TOKEN@gitee.com/$GITEE_USERNAME/china-media-digest.git" master 2>&1 | tail -3
+          echo "--- 触发 Gitee Pages 重建 ---"
+          curl -s -X POST "https://gitee.com/api/v5/repos/$GITEE_USERNAME/china-media-digest/pages/builds?access_token=$GITEE_TOKEN"
