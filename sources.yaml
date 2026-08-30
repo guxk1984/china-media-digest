@@ -1,0 +1,65 @@
+# 境外主流媒体涉华监测 · 数据源配置
+# 全部使用公开 RSS，无需 API Key 即可抓取；中文摘要由可选 LLM 完成。
+keywords:
+  - china
+  - chinese
+  - beijing
+  - "hong kong"
+  - taiwan
+  - xinjiang
+  - tibet
+  - "south china sea"
+  - "chinese economy"
+  - "chinese tech"
+  - "china-us"
+  - "china trade"
+
+sources:
+  - name: Reuters
+    country: 美国
+    attr: 商业
+    rss: https://news.google.com/rss/search?q=site:reuters.com+china&hl=en-US&gl=US&ceid=US:en
+  - name: AP
+    country: 美国
+    attr: 商业
+    rss: https://apnews.com/index.rss
+  - name: AFP
+    country: 法国
+    attr: 公营
+    rss: https://www.france24.com/en/rss
+  - name: BBC
+    country: 英国
+    attr: 公营
+    rss: http://feeds.bbci.co.uk/news/world/asia/china/rss.xml
+  - name: DW
+    country: 德国
+    attr: 公营
+    rss: https://rss.dw.com/rdf/rss-en-all
+  - name: France24
+    country: 法国
+    attr: 公营
+    rss: https://www.france24.com/en/rss
+  - name: Financial Times
+    country: 英国
+    attr: 商业
+    rss: https://www.ft.com/rss/home
+  - name: The New York Times
+    country: 美国
+    attr: 商业
+    rss: https://rss.nytimes.com/services/xml/rss/nyt/China.xml
+  - name: The Wall Street Journal
+    country: 美国
+    attr: 商业
+    rss: https://feeds.a.dj.com/rss/RSSWorldNews.xml
+  - name: The Economist
+    country: 英国
+    attr: 商业
+    rss: https://www.economist.com/china/rss.xml
+  - name: Bloomberg
+    country: 美国
+    attr: 商业
+    rss: https://feeds.bloomberg.com/markets/news.rss
+  - name: The Guardian
+    country: 英国
+    attr: 公营
+    rss: https://www.theguardian.com/world/china/rss
